@@ -111,6 +111,34 @@ function getModuleUrl() {
   return url.substring(0, url.lastIndexOf('/'));
 }
 
+function loadModuleResources(resources) {
+  const promises = resources.map(res => {
+    const key = res.id || res.url;
+    if (document.getElementById(key)) {
+      return Promise.resolve();
+    }
+    if (res.type === 'css') {
+      loadCSSModule(key, res.url);
+      return Promise.resolve();
+    }
+    if (res.type === 'js') {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.id = key;
+        script.src = res.url;
+        if (res.integrity) script.integrity = res.integrity;
+        if (res.crossorigin) script.crossOrigin = res.crossorigin;
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error(`Échec chargement script ${res.url}`));
+        document.head.appendChild(script);
+      });
+    }
+    return Promise.resolve();
+  });
+  return Promise.all(promises).then(() => {});
+}
+
+
 function getBooleanParam(paramName, defaultValue) {
 	const urlParams = new URLSearchParams(window.location.search);
 	const paramValue = urlParams.get(paramName);
@@ -245,4 +273,4 @@ function positionDiv(container) {
 
 window.loadCSSModule 		= loadCSSModule;
 window.getModuleUrl   	= getModuleUrl;
-window.getBooleanParam 	= getBooleanParam;
+window.loadModuleResources = loadModuleResources;
