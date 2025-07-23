@@ -1,0 +1,49 @@
+#alertBannerContainer {
+  z-index: 500;
+  position: fixed;
+  top: 30px;
+  left: auto;
+  right: -100%;
+  width: 25%;
+  height: 75px;
+  background: linear-gradient(to left, black, #00007f);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  clip-path: polygon(30px 0, 100% 0, 100% 100%, 0 100%);
+}
+#alertBannerContainer #alertBannerTitle {
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 26px;
+  text-decoration: underline;
+  white-space: nowrap;
+  left: 30px;
+  top: 0px;
+  position: absolute;
+}
+#alertBannerContainer #alertBannerTitle p {
+  margin: 0px;
+  padding: 0px 1em 0px 0px;
+  background: linear-gradient(to bottom, #ffff7f, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+#alertBannerContainer #alertBannerMessage {
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  white-space: nowrap;
+  left: 30px;
+  bottom: 0px;
+  position: absolute;
+}
+#alertBannerContainer #alertBannerMessage p {
+  margin: 0px;
+  padding: 0px 1em 0px 0px;
+}

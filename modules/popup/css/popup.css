@@ -1,0 +1,24 @@
+#popupContainer {
+  z-index: 400;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#popupContainer .overlay-popup {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  padding: 1em 1.5em;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  border-radius: 0.5em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  max-width: 20%;
+  text-align: center;
+  transition: opacity 0.5s ease-out;
+}
+#popupContainer .overlay-popup.fade-out {
+  opacity: 0;
+}

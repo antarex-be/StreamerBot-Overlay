@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'led_counter-7';
+  src: url('fonts/led_counter-7.ttf') format('truetype');
+}
+#scrollingBannerContainer {
+  z-index: 500;
+  position: fixed;
+  top: 30px;
+  left: -100%;
+  width: 70%;
+  height: 75px;
+  background: linear-gradient(to right, black, #800000);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 30px) 100%, 0 100%);
+}
+#scrollingBannerContainer #scrollingBannerMessage {
+  width: 100%;
+  color: limegreen;
+  font-family: 'led_counter-7', monospace;
+  font-size: 64px;
+  white-space: nowrap;
+  display: inline-block;
+  position: absolute;
+  animation: scrolling 10s linear infinite;
+}
+@keyframes scrolling {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
