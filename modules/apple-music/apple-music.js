@@ -100,6 +100,10 @@
         visibilityDuration = data.param1 || visibilityDefault;
         showSongInfo();
       });
+      SBdispatcher.on('musicPlaying-hide', data => {
+        visibilityDuration = -1;
+        SetVisibility(false);
+      });
     }
 
     function connectws() {
@@ -123,6 +127,9 @@
             // Song changes
             case ("playbackStatus.nowPlayingItemDidChange"):
               UpdateSongInfo(data);
+              if (visibilityDuration != "-1") {
+                showSongInfo();
+              }
               break;
 
             // Progress bar moves
@@ -149,6 +156,12 @@
           SetVisibility(false);
         }, visibilityDuration * 1000);
       }
+
+      if (visibilityDuration == "-1") {
+        setTimeout(() => {
+          SetVisibility(false);
+        }, visibilityDefault * 1000);
+      }
     }
 
     function UpdateSongInfo(data) {
@@ -169,9 +182,6 @@
         document.getElementById("albumArtBack").src = albumArtUrl;
         document.getElementById("backgroundImageBack").src = albumArtUrl;
       }, 2 * animationSpeed * 500);
-
-      showSongInfo()
-
     }
 
     function UpdateTextLabel(div, text) {
@@ -204,7 +214,6 @@
     }
 
     function UpdatePlaybackState(data) {
-      console.log(data);
       switch (data.state) {
         case ("paused"):
         case ("stopped"):

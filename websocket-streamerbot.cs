@@ -23,6 +23,10 @@ public class CPHInline
 		if (args.ContainsKey("wsParam3")) message.Add("param3",args["wsParam3"]);
 		if (args.ContainsKey("wsParam4")) message.Add("param4",args["wsParam4"]);
 		if (args.ContainsKey("wsParam5")) message.Add("param5",args["wsParam5"]);
+		if (args.ContainsKey("wsParam6")) message.Add("param6",args["wsParam6"]);
+		if (args.ContainsKey("wsParam7")) message.Add("param7",args["wsParam7"]);
+		if (args.ContainsKey("wsParam8")) message.Add("param8",args["wsParam8"]);
+		if (args.ContainsKey("wsParam9")) message.Add("param9",args["wsParam9"]);
 		
 		var jsonMessage = JsonConvert.SerializeObject(message);
 		CPH.WebsocketBroadcastJson(jsonMessage);
