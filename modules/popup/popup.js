@@ -54,14 +54,23 @@
    * @returns {boolean} true si supprimé, false sinon
    */
   function deletePopup(reference) {
-    const target = findPopupByRef(reference);
+    const active = window._activePopups || [];
+    const isEmpty =
+      reference == null || (typeof reference === 'string' && reference.trim() === '');
+
+    if (isEmpty) {
+      const toRemove = active.slice();
+      toRemove.forEach(removePopupElement);
+      return toRemove.length > 0;
+    }
+
+    const target = findPopupByRef(String(reference));
     if (target) {
       removePopupElement(target);
       return true;
     }
-    return false;
-  }
-  // Expose globalement
+    return false; 
+  } 
   window.deletePopup = deletePopup;
 
   /**
@@ -149,8 +158,7 @@
 
     // >>> Nouveau : suppression par event
     SBdispatcher.on('stream-popup-delete', data => {
-      // data.param1 = reference
-      deletePopup(data?.param1 != null ? String(data.param1) : null);
+      deletePopup(data?.param1);
     });
   }
 })();
